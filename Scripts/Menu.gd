@@ -5,6 +5,7 @@ extends Control
 #@onready var environment = 
 
 func _ready():
+	Globals.configure_display_scaling()
 	$Panel/VBox/ColorPickerButton.color = recolor_material.get_shader_parameter("paint_color")
 	fps_label.visible = $Panel/VBox/FPSButton.button_pressed
 	visible = false
@@ -50,10 +51,7 @@ func _on_fullscreen_pressed():
 	toggle_fullscreen()
 
 func _on_scaling_option_button_item_selected(index):
-	var root = get_tree().get_root()
-
-	root.set_content_scale_aspect(Window.CONTENT_SCALE_ASPECT_KEEP)
-	root.scaling_3d_scale = 1.0 - index * 0.1
+	Globals.set_3d_render_scale(1.0 - index * 0.1)
 
 
 func _on_color_picker_button_color_changed(color):
